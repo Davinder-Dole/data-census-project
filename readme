@@ -1,1 +1,17 @@
-lets get started
+Datasets
+1.	https://api.census.gov/data/timeseries/idb/1year?get=AREA_KM2,NAME,AGE,POP&FIPS=US&time=1991&SEX=0
+a.	Gives Population for people of X Age for the Country, Year, and Sex that’s selected.
+2.	https://api.census.gov/data/timeseries/idb/5year?get=NAME,POP,CBR,CDR,E0,AREA_KM2&FIPS=NO&time=2012
+a.	Gives Metrics for the people for a selected Country and Year.
+i.	List of Metrics available: https://api.census.gov/data/timeseries/idb/5year/variables.html
+
+
+Graphs
+1.	Population vs. Age Bar Graph using Dataset 1
+a.	Bar graph that shows the number of people of each age for the selected country, year, and sex.
+b.	https://www.thoughtco.com/thmb/t2BC8W3XzYriaCcIfP-kpECxEe4=/918x640/filters:no_upscale():max_bytes(150000):strip_icc()/afg2-58b9cd145f9b58af5ca7a51f.jpg
+2.	GeoJSON Map with Markers Sized by Population for Selected Year and Sex.
+a.	http://3.bp.blogspot.com/_yECf1Q0GlOk/SAtPOMtVZwI/AAAAAAAABXo/8tBbY_Gnns8/s400/propsymbols_europe.png 
+3.	Selected Metric vs. Countries using Dataset 2
+a.	Whichever Metric will be compared for all the countries selected.
+b.	http://oxfamamericablogs.s3.amazonaws.com/wp-content/uploads/2008/10/maternal-mortality.jpg
