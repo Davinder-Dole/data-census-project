@@ -2,42 +2,18 @@
 <meta charset="utf-8">
 <head>
     <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
-<style>
 
-.bar--positive {
-  fill: steelblue;
-}
-
-.bar--negative {
-  fill: darkorange;
-}
-
-.axis text {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-</style>
 <body>
 
-<div id = "graph">
+<div id = "text"></div>
+<div id = "graph"></div>
 
-</div>
-<select name="Country">
-    <option value="UK">UK</option>
-    <option value="US">US</option>
-    <option value="NO">NO</option>
-</select>
-<br><br>
-<input id="submitcountry" type="submit">
+<select name="Country" id="countryselect"></select>
+<select name="Year" id="yearselect"></select>
+<select name="Groupings" id="groupingselect"></select>
 
-<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/d3.v5.min.js"></script>
 <script src="app.js"></script>
 </body>
