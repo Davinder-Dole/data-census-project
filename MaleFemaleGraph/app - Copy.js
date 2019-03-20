@@ -38,47 +38,35 @@ var svg = d3.select("#graph").append("svg")
 d3.json("https://api.census.gov/data/timeseries/idb/1year?get=AREA_KM2,NAME,AGE,POP&FIPS=US&time=2019&SEX=1&key=322c07fb07c31c5ff4f064a0fb839f4fc7bf8de5").then(function(data){
   d3.json("https://api.census.gov/data/timeseries/idb/1year?get=AREA_KM2,NAME,AGE,POP&FIPS=US&time=2019&SEX=2&key=322c07fb07c31c5ff4f064a0fb839f4fc7bf8de5").then(function(data2){
 
-
-
-    data = groupyears(data, 2);
-    data2 = groupyears(data2, 2);
-
+    data2.shift();
+    data2.pop();
     data2.forEach(function(x) {
-      x[1] = -x[1];
+      x[3] = -x[3];
     });
 
-    max = d3.max(data, function(d) { return +d[1]; });
-    min = d3.min(data2, function(d) { return +d[1]; });
+    data.shift();
+    data.pop();
 
-    var percentData = data.map((x, i) => [data[i][0], (+data[i][1] + data2[i][1])/(Math.abs(+data[i][1]) + Math.abs(data2[i][1]))]);
+    data = groupyears(data, years);
+    data2 = groupyears(data2, years);
 
-    percentmax = d3.max(percentData, function(d) { return Math.abs(d[1]); });
-
-    resizefactor = (max - min)/(percentmax * 5);
-    console.log(resizefactor);
-
-    shift = 0;
+    var percentData = data.map((x, i) => [(+data[i][3] + data2[i][3])/(Math.abs(+data[i][3]) + Math.abs(data2[i][3])), data[i][2]]);
+    
     data = data.concat(data2);
 
-    
-
-    x.domain(d3.extent(data, function(d) { return +d[1]; })).nice();
-    y.domain(data.map(function(d) { return d[0]; }));
-    x2.domain(d3.extent(percentData, function(d) { return +d[1]; })).nice();
+    x.domain(d3.extent(data, function(d) { return +d[3]; })).nice();
+    y.domain(data.map(function(d) { return d[2]; }));
+    x2.domain(d3.extent(percentData, function(d) { return +d[0]; })).nice();
     
     var toolTip = d3.tip()
-    .attr("class", "tooltip")
-    .offset([0, 0])
+    .attr("class", 'tooltip')
     .html(function(d) {
-      if (d[1] > 0){
-        return (`<div class = "male">${Math.abs(d[1]).toLocaleString()} males aged ${d[0]}</div>`);
+      if (d[3] > 0){
+        return (`${Math.abs(d[3]).toLocaleString()} males aged ${d[2]}`);
       } else {
-        return (`<div class = "female">${Math.abs(d[1]).toLocaleString()} females aged ${d[0]}</div>`);
+        return (`${Math.abs(d[3]).toLocaleString()} females aged ${d[2]}`);
       };
     });
-
-
-  
 
     svg.call(toolTip);
 
@@ -86,10 +74,10 @@ d3.json("https://api.census.gov/data/timeseries/idb/1year?get=AREA_KM2,NAME,AGE,
       .data(data)
       .enter()
       .append("rect")
-      .attr("class", function(d) { return "bar bar--" + (+d[1] < 0 ? "negative" : "positive"); })
-      .attr("x", function(d) { return x(Math.min(0, +d[1])); })
-      .attr("y", function(d) { return y(d[0]); })
-      .attr("width", function(d) { return Math.abs(x(+d[1]) - x(0)); })
+      .attr("class", function(d) { return "bar bar--" + (+d[3] < 0 ? "negative" : "positive"); })
+      .attr("x", function(d) { return x(Math.min(0, +d[3])); })
+      .attr("y", function(d) { return y(d[2]); })
+      .attr("width", function(d) { return Math.abs(x(+d[3]) - x(0)); })
       .attr("height", y.bandwidth() - bargap)
       .on("mouseover", function(d) {
         toolTip.show(d, this);
@@ -98,25 +86,13 @@ d3.json("https://api.census.gov/data/timeseries/idb/1year?get=AREA_KM2,NAME,AGE,
         toolTip.hide(d);
         });
 
-    percentGroup = svg.selectAll(".bar .layer2")
-      .data(percentData)
-      .enter()
-      .append("rect")
-      .attr("class", "bar--percent")
-      .attr("x", function(d) { return x(Math.min(0, +d[1] * resizefactor)); })
-      .attr("y", function(d) { return y(d[0]); })
-      .attr("width", function(d) { return ((Math.abs(x(+d[1]) - x(0))) * resizefactor); })
-      .attr("height", y.bandwidth() - bargap);
-
-    // var drawLine = d3.line()
-    //   .x(data => x2(data[0]))
-    //   .y(data => y(data[1]))
-    //   .curve(d3.curveCardinal.tension(0));
-
+    var drawLine = d3.line()
+      .x(data => x2(data[0]))
+      .y(data => y(data[1]));
   
-    // svg.append("path")
-    //   .attr("d", drawLine(percentData))
-    //   .classed("line", true);
+    svg.append("path")
+      .attr("d", drawLine(percentData))
+      .classed("line", true);
 
     svg.append("g")
         .attr("class", "xaxis")
@@ -124,15 +100,15 @@ d3.json("https://api.census.gov/data/timeseries/idb/1year?get=AREA_KM2,NAME,AGE,
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
 
-    // svg.append("g")
-    //     .attr("class", "xaxis")
-    //     .style("font-size", 20)
-    //     .attr("transform", "translate(" + shift + ",0)")
-    //     .call(xAxis2);
+    svg.append("g")
+        .attr("class", "xaxis")
+        .style("font-size", 20)
+        .call(xAxis2);
 
     svg.append("g")
         .attr("class", "yaxis")
         .attr("transform", "translate(" + x(0) + ",0)")
+        .style("font-size", 15)
         .call(yAxis.ticks(10));
 
 
@@ -153,19 +129,9 @@ function changePlot(country, years, year){
       data = groupyears(data, years);
       data2 = groupyears(data2, years);
 
-
       data2.forEach(function(x) {
         x[1] = -x[1];
       });
-
-      max = d3.max(data, function(d) { return +d[1]; });
-      min = d3.min(data2, function(d) { return +d[1]; });
-
-      var percentData = data.map((x, i) => [data[i][0], (+data[i][1] + data2[i][1])/(Math.abs(+data[i][1]) + Math.abs(data2[i][1]))]);
-
-      percentmax = d3.max(percentData, function(d) { return Math.abs(d[1]); });
-
-      resizefactor = (max - min)/(percentmax * 5);
 
       data = data.concat(data2);
 
@@ -176,21 +142,21 @@ function changePlot(country, years, year){
 
       if (years == 1){
         var toolTip = d3.tip()
-          .attr("class", "tooltip")
-          .html(function(d) {
-            if (d[1] > 0){
-              return (`<div class = "male">${Math.abs(d[1]).toLocaleString()} males age ${d[0]}</div>`);
-            } else {
-              return (`<div class = "female">${Math.abs(d[1]).toLocaleString()} females age ${d[0]}</div>`);
-            };
+                      .attr("class", 'tooltip')
+                      .html(function(d) {
+        if (d[1] > 0){
+          return (`${Math.abs(d[1]).toLocaleString()} males aged ${d[0]}`);
+        } else {
+          return (`${Math.abs(d[1]).toLocaleString()} females aged ${d[0]}`);
+        };
       })} else {
-        var toolTip = d3.tip()
-        .attr("class", "tooltip")
-        .html(function(d) {
+          var toolTip = d3.tip()
+                        .attr("class", 'tooltip')
+                        .html(function(d) {
           if (d[1] > 0){
-            return (`<div class = "male">${Math.abs(d[1]).toLocaleString()} males aged ${d[0]}</div>`);
+            return (`${Math.abs(d[1]).toLocaleString()} males ages ${d[0]}`);
           } else {
-            return (`<div class = "female">${Math.abs(d[1]).toLocaleString()} females aged ${d[0]}</div>`);
+            return (`${Math.abs(d[1]).toLocaleString()} females ages ${d[0]}`);
           };
       })};
 
@@ -210,20 +176,8 @@ function changePlot(country, years, year){
           .attr("y", function(d) { return y(d[0]); })
           .attr("width", function(d) { return Math.abs(x(+d[1]) - x(0)); })
           .attr("height", y.bandwidth() - bargap);
-
-        percentGroup = svg.selectAll(".bar--percent")
-          .data(percentData)
-          .transition()
-          .duration(1000)
-          .attr("class", "bar--percent")
-          .attr("x", function(d) { return x(Math.min(0, +d[1] * resizefactor)); })
-          .attr("y", function(d) { return y(d[0]); })
-          .attr("width", function(d) { return ((Math.abs(x(+d[1]) - x(0))) * resizefactor); })
-          .attr("height", y.bandwidth() - bargap);
-
       } else {
         d3.selectAll(".bar").remove();
-        d3.selectAll(".bar--percent").remove();
 
         barGroup = svg.selectAll(".bar")
         .data(data)
@@ -241,16 +195,6 @@ function changePlot(country, years, year){
           toolTip.hide(d);
           });
 
-        percentGroup = svg.selectAll(".bar--percent")
-          .data(percentData)
-          .enter()
-          .append("rect")
-          .attr("class", "bar--percent")
-          .attr("x", function(d) { return x(Math.min(0, +d[1] * resizefactor)); })
-          .attr("y", function(d) { return y(d[0]); })
-          .attr("width", function(d) { return ((Math.abs(x(+d[1]) - x(0))) * resizefactor); })
-          .attr("height", y.bandwidth() - bargap);
-
       };
 
       svg.append("g")
@@ -263,25 +207,7 @@ function changePlot(country, years, year){
           .attr("class", "yaxis")
           .attr("transform", "translate(" + x(0) + ",0)")
           .call(yAxis);
-      
-      if (years == 1){
-        d3.selectAll('.yaxis').style("font-size", "10px");
-        d3.selectAll('.yaxis').style("font-weight", "normal");
-      } else if (years == 2){
-        d3.selectAll('.yaxis').style("font-size", "14px");
-      } else if (years == 4){
-        d3.selectAll('.yaxis').style("font-size", "20px");
-      } else if (years == 5){
-        d3.selectAll('.yaxis').style("font-size", "25px");
-      } else if (years == 10){
-        d3.selectAll('.yaxis').style("font-size", "30px");
-      } else if (years == 20){
-        d3.selectAll('.yaxis').style("font-size", "35px");
-      } else if (years == 25){
-        d3.selectAll('.yaxis').style("font-size", "40px");
-      } else if (years == 50){
-        d3.selectAll('.yaxis').style("font-size", "45px");
-      }
+
       
 
 
@@ -318,7 +244,7 @@ function groupyears(data2, years){
   yeargroupings.forEach(function(data, index){
     sum = 0;
     for(var i=0; i<years; i++){
-      sum += data2[index * years + 1][3];
+      sum += data2[index * years + i][3];
     }
     yeargroupings[index].push(sum);
     
@@ -360,7 +286,7 @@ yearlist.forEach(function(data){
 })
 
 d3.select('#countryselect').property('value', 'US');
-d3.select('#groupingselect').property('value', 2);
+d3.select('#groupingselect').property('value', 1);
 d3.select('#yearselect').property('value', '2019');
 
 d3.select('#countryselect').on('change', buttonClick);

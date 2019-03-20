@@ -12,8 +12,34 @@ body {
   fill: orchid;
 }
 
+.bar--percent {
+  fill: yellow;
+  opacity: 0.5;
+  pointer-events : none;
+}
+
+.bar--positive:hover {
+  fill: blue;
+}
+
+.bar--negative:hover {
+  fill: fuchsia;
+}
+
 .axis text {
-  font: 10px sans-serif;
+  pointer-events : none;
+}
+
+.yaxis {
+  stroke-width: 2px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.xaxis {
+  stroke-width: 2px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .axis path,
@@ -21,5 +47,32 @@ body {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
+  pointer-events : none;
 }
 
+.tooltip {
+  position: absolute;
+  width: 90px;
+  height: 70px;
+  padding: 10px;
+  font: 12px sans-serif;
+  text-align: center;
+  color: white;
+  border: 0;
+  border-radius: 10px;
+}
+
+.male {
+  background: blue;
+}
+
+.female {
+  background: fuchsia;
+}
+
+.line {
+  fill: none;
+  stroke-width: 5px;
+  stroke: black;
+  stroke-linecap: round;
+}
