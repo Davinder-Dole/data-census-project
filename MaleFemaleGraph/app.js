@@ -1,67 +1,205 @@
-// Define SVG area dimensions
-var svgWidth = 960;
-var svgHeight = 660;
+countrylist = [["Aruba", "AA"],["Antigua and Barbuda", "AC"],["United Arab Emirates", "AE"],["Afghanistan", "AF"],["Algeria", "AG"],["Azerbaijan", "AJ"],["Albania", "AL"],["Armenia", "AM"],["Andorra", "AN"],["Angola", "AO"],["American Samoa", "AQ"],["Argentina", "AR"],["Australia", "AS"],["Austria", "AU"],["Anguilla", "AV"],["Bahrain", "BA"],["Barbados", "BB"],["Botswana", "BC"],["Bermuda", "BD"],["Belgium", "BE"],["Bahamas, The", "BF"],["Bangladesh", "BG"],["Belize", "BH"],["Bosnia and Herzegovina", "BK"],["Bolivia", "BL"],["Burma", "BM"],["Benin", "BN"],["Belarus", "BO"],["Solomon Islands", "BP"],["Brazil", "BR"],["Bhutan", "BT"],["Bulgaria", "BU"],["Brunei", "BX"],["Burundi", "BY"],["Canada", "CA"],["Cambodia", "CB"],["Chad", "CD"],["Sri Lanka", "CE"],["Congo (Brazzaville)", "CF"],["Congo (Kinshasa)", "CG"],["China", "CH"],["Chile", "CI"],["Cayman Islands", "CJ"],["Cameroon", "CM"],["Comoros", "CN"],["Colombia", "CO"],["Northern Mariana Islands", "CQ"],["Costa Rica", "CS"],["Central African Republic", "CT"],["Cuba", "CU"],["Cabo Verde", "CV"],["Cook Islands", "CW"],["Cyprus", "CY"],["Denmark", "DA"],["Djibouti", "DJ"],["Dominica", "DO"],["Dominican Republic", "DR"],["Ecuador", "EC"],["Egypt", "EG"],["Ireland", "EI"],["Equatorial Guinea", "EK"],["Estonia", "EN"],["Eritrea", "ER"],["El Salvador", "ES"],["Ethiopia", "ET"],["Czechia", "EZ"],["Finland", "FI"],["Fiji", "FJ"],["Micronesia, Federated States of", "FM"],["Faroe Islands", "FO"],["French Polynesia", "FP"],["France", "FR"],["Gambia, The", "GA"],["Gabon", "GB"],["Georgia", "GG"],["Ghana", "GH"],["Gibraltar", "GI"],["Grenada", "GJ"],["Guernsey", "GK"],["Greenland", "GL"],["Germany", "GM"],["Guam", "GQ"],["Greece", "GR"],["Guatemala", "GT"],["Guinea", "GV"],["Guyana", "GY"],["Gaza Strip", "GZ"],["Haiti", "HA"],["Hong Kong", "HK"],["Honduras", "HO"],["Croatia", "HR"],["Hungary", "HU"],["Iceland", "IC"],["Indonesia", "ID"],["Isle of Man", "IM"],["India", "IN"],["Iran", "IR"],["Israel", "IS"],["Italy", "IT"],["Cote d'Ivoire", "IV"],["Iraq", "IZ"],["Japan", "JA"],["Jersey", "JE"],["Jamaica", "JM"],["Jordan", "JO"],["Kenya", "KE"],["Kyrgyzstan", "KG"],["Korea, North", "KN"],["Kiribati", "KR"],["Korea, South", "KS"],["Kuwait", "KU"],["Kosovo", "KV"],["Kazakhstan", "KZ"],["Laos", "LA"],["Lebanon", "LE"],["Latvia", "LG"],["Lithuania", "LH"],["Liberia", "LI"],["Slovakia", "LO"],["Liechtenstein", "LS"],["Lesotho", "LT"],["Luxembourg", "LU"],["Libya", "LY"],["Madagascar", "MA"],["Macau", "MC"],["Moldova", "MD"],["Mongolia", "MG"],["Montserrat", "MH"],["Malawi", "MI"],["Montenegro", "MJ"],["Macedonia", "MK"],["Mali", "ML"],["Monaco", "MN"],["Morocco", "MO"],["Mauritius", "MP"],["Mauritania", "MR"],["Malta", "MT"],["Oman", "MU"],["Maldives", "MV"],["Mexico", "MX"],["Malaysia", "MY"],["Mozambique", "MZ"],["New Caledonia", "NC"],["Niger", "NG"],["Vanuatu", "NH"],["Nigeria", "NI"],["Netherlands", "NL"],["Sint Maarten", "NN"],["Norway", "NO"],["Nepal", "NP"],["Nauru", "NR"],["Suriname", "NS"],["Nicaragua", "NU"],["New Zealand", "NZ"],["South Sudan", "OD"],["Paraguay", "PA"],["Peru", "PE"],["Pakistan", "PK"],["Poland", "PL"],["Panama", "PM"],["Portugal", "PO"],["Papua New Guinea", "PP"],["Palau", "PS"],["Guinea-Bissau", "PU"],["Qatar", "QA"],["Serbia", "RI"],["Marshall Islands", "RM"],["Saint Martin", "RN"],["Romania", "RO"],["Philippines", "RP"],["Puerto Rico", "RQ"],["Russia", "RS"],["Rwanda", "RW"],["Saudi Arabia", "SA"],["Saint Pierre and Miquelon", "SB"],["Saint Kitts and Nevis", "SC"],["Seychelles", "SE"],["South Africa", "SF"],["Senegal", "SG"],["Saint Helena, Ascension, and Tristan da Cunha", "SH"],["Slovenia", "SI"],["Sierra Leone", "SL"],["San Marino", "SM"],["Singapore", "SN"],["Somalia", "SO"],["Spain", "SP"],["Saint Lucia", "ST"],["Sudan", "SU"],["Sweden", "SW"],["Syria", "SY"],["Switzerland", "SZ"],["Saint Barthelemy", "TB"],["Trinidad and Tobago", "TD"],["Thailand", "TH"],["Tajikistan", "TI"],["Turks and Caicos Islands", "TK"],["Tonga", "TN"],["Togo", "TO"],["Sao Tome and Principe", "TP"],["Tunisia", "TS"],["Timor-Leste", "TT"],["Turkey", "TU"],["Tuvalu", "TV"],["Taiwan", "TW"],["Turkmenistan", "TX"],["Tanzania", "TZ"],["Curacao", "UC"],["Uganda", "UG"],["United Kingdom", "UK"],["Ukraine", "UP"],["United States", "US"],["Burkina Faso", "UV"],["Uruguay", "UY"],["Uzbekistan", "UZ"],["Saint Vincent and the Grenadines", "VC"],["Venezuela", "VE"],["Virgin Islands, British", "VI"],["Vietnam", "VM"],["Virgin Islands, U.S.", "VQ"],["Namibia", "WA"],["West Bank", "WE"],["Wallis and Futuna", "WF"],["Western Sahara", "WI"],["Samoa", "WS"],["Eswatini", "WZ"],["Yemen", "YM"],["Zambia", "ZA"],["Zimbabwe", "ZI"]]
+groupinglist = [1, 2, 4, 5, 10, 20, 25, 50]
+yearlist = ["2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991"]
 
-// Define the chart's margins as an object
-var chartMargin = {
-  top: 30,
-  right: 30,
-  bottom: 30,
-  left: 30
+var margin = {top: 20, right: 30, bottom: 40, left: 30},
+width = 1920 - margin.left - margin.right,
+height = 1000 - margin.top - margin.bottom;
+bargap = height/1000;
+
+var x = d3.scaleLinear()
+    .range([0, width]);
+
+var y = d3.scaleBand()
+    .range([0, height])
+    .round(0.1);
+
+var xAxis = d3.axisBottom(x).tickFormat(function (d) { 
+  if (d < 0){
+    d = -d;
+  }
+  return d;
+});
+
+var yAxis = d3.axisLeft(y);
+
+var svg = d3.select("#graph").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+d3.json("https://api.census.gov/data/timeseries/idb/1year?get=AREA_KM2,NAME,AGE,POP&FIPS=US&time=2019&SEX=1&key=322c07fb07c31c5ff4f064a0fb839f4fc7bf8de5").then(function(data){
+  d3.json("https://api.census.gov/data/timeseries/idb/1year?get=AREA_KM2,NAME,AGE,POP&FIPS=US&time=2019&SEX=2&key=322c07fb07c31c5ff4f064a0fb839f4fc7bf8de5").then(function(data2){
+
+    data2.shift();
+    data2.pop();
+    data2.forEach(function(x) {
+      x[3] = -x[3];
+    });
+
+    data.shift();
+    data.pop();
+    data = data.concat(data2);
+
+    x.domain(d3.extent(data, function(d) { return +d[3]; })).nice();
+    y.domain(data.map(function(d) { return d[2]; }));
+    
+
+    svg.selectAll(".bar")
+      .data(data)
+      .enter()
+      .append("rect")
+      .attr("class", function(d) { return "bar bar--" + (+d[3] < 0 ? "negative" : "positive"); })
+      .attr("x", function(d) { return x(Math.min(0, +d[3])); })
+      .attr("y", function(d) { return y(d[2]); })
+      .attr("width", function(d) { return Math.abs(x(+d[3]) - x(0)); })
+      .attr("height", y.bandwidth() - bargap);
+
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(" + x(0) + ",0)")
+        .call(yAxis);
+  })});
+
+function changePlot(country, years, year){
+
+  d3.json("https://api.census.gov/data/timeseries/idb/1year?get=AREA_KM2,NAME,AGE,POP&FIPS=" + country + "&time=" + year + "&SEX=1&key=322c07fb07c31c5ff4f064a0fb839f4fc7bf8de5").then(function(data){
+    d3.json("https://api.census.gov/data/timeseries/idb/1year?get=AREA_KM2,NAME,AGE,POP&FIPS=" + country + "&time=" + year + "&SEX=2&key=322c07fb07c31c5ff4f064a0fb839f4fc7bf8de5").then(function(data2){
+      
+      d3.select(".x.axis").remove()
+      d3.select(".y.axis").remove()
+
+      data = groupyears(data, years);
+      data2 = groupyears(data2, years);
+
+      data2.forEach(function(x) {
+        x[1] = -x[1];
+      });
+
+      data = data.concat(data2);
+
+      x.domain(d3.extent(data, function(d) { return + d[1]; })).nice();
+      y.domain(data.map(function(d) { return d[0]; }));
+
+      if ((d3.selectAll(".bar")._groups[0].length) == data.length){
+        svg.selectAll(".bar")
+          .data(data)
+          .transition()
+          .duration(1000)
+          .attr("class", function(d) { return "bar bar--" + (+d[1] < 0 ? "negative" : "positive"); })
+          .attr("x", function(d) { return x(Math.min(0, +d[1])); })
+          .attr("y", function(d) { return y(d[0]); })
+          .attr("width", function(d) { return Math.abs(x(+d[1]) - x(0)); })
+          .attr("height", y.bandwidth() - bargap);
+      } else {
+        d3.selectAll(".bar").remove();
+
+        svg.selectAll(".bar")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("class", function(d) { return "bar bar--" + (+d[1] < 0 ? "negative" : "positive"); })
+        .attr("x", function(d) { return x(Math.min(0, +d[1])); })
+        .attr("y", function(d) { return y(d[0]); })
+        .attr("width", function(d) { return Math.abs(x(+d[1]) - x(0)); })
+        .attr("height", y.bandwidth() - bargap);
+
+      };
+
+      svg.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis);
+
+      svg.append("g")
+          .attr("class", "y axis")
+          .attr("transform", "translate(" + x(0) + ",0)")
+          .call(yAxis);
+})})};
+
+function type(d) {
+  d.value = +d.value;
+  return d;
 };
 
-// Define dimensions of the chart area
-var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
-var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
+function groupyears(data2, years){
 
-// Select body, append SVG area to it, and set the dimensions
-var svg = d3.select("body")
-  .append("svg")
-  .attr("height", svgHeight)
-  .attr("width", svgWidth);
 
-// Append a group to the SVG area and shift ('translate') it to the right and to the bottom
-var chartGroup = svg.append("g")
-  .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
-
-// Load data from hours-of-tv-watched.csv
-d3.csv("./hours-of-tv-watched.csv", function(error, tvData) {
-  if (error) return console.warn(error);
-  console.log(tvData);
-  tvData.forEach(function(data) {
-    data.hours = +data.hours;
+  data2.shift();
+  data2.forEach(function(x) {
+    x[3] = +x[3];
   });
 
-  var names = tvData.map(data => data.name);
-  var hours = tvData.map(data => data.hours);
+  yeargroupings = [];
+  data2.forEach(function(data, index) {
+    if (years > 1){
+      if (index * years < data2.length - 1){
+        yeargroupings.push([`${index * years} - ${(index * years) + (years - 1)}`]);
+      }
+    } else {
+      if (index * years < data2.length - 1){
+        yeargroupings.push([`${index * years}`]);
+      }
+    }
+  });
 
-  var yScale = d3.scaleBand()
-  .domain(names)
-  .range([0, svgHeight])
-  .padding(0.1);
 
-  var xScale = d3.scaleLinear()
-  .domain([0, d3.max(hours)])
-  .range([0, svgWidth]);
+  yearsums = [];
+  yeargroupings.forEach(function(data, index){
+    sum = 0;
+    for(var i=0; i<years; i++){
+      sum += data2[index * years + i][3];
+    }
+    yeargroupings[index].push(sum);
+    
+  });
 
-  var yAxis = d3.axisLeft(yScale);
-  var xAxis = d3.axisBottom(xScale);
+  return yeargroupings;
+    
+};
 
-  chartGroup.append("g")
-  .attr("transform", `translate(0, ${chartHeight})`)
-  .call(xAxis);
+function buttonClick() {
+  d3.event.preventDefault();
+  var country = d3.select('#countryselect').property('value');
+  var groupings = d3.select('#groupingselect').property('value');
+  var year = d3.select('#yearselect').property('value');
+  changePlot(country, groupings, year);
+}
 
-  chartGroup.append("g")
-  .call(yAxis);
 
-  chartGroup.selectAll(".bar")
-    .data(hours)
-    .enter()
-    .append("rect")
-    .classed("bar", true)
-    .attr("x", (d, i) => xScale(names[i]))
-    .attr("y", d => yScale(d))
-    .attr("width", xScale.bandwidth())
-    .attr("height", d => chartHeight - yScale(d));
 
-});
+countrylist.forEach(function(data){
+  d3.select('#countryselect')
+    .append('option')
+    .attr("value", data[1])
+    .text(data[0])
+})
+
+groupinglist.forEach(function(data){
+  d3.select('#groupingselect')
+    .append('option')
+    .attr("value", data)
+    .text(data)
+})
+
+yearlist.forEach(function(data){
+  d3.select('#yearselect')
+    .append('option')
+    .attr("value", data)
+    .text(data)
+})
+
+d3.select('#countryselect').property('value', 'US');
+d3.select('#groupingselect').property('value', 1);
+d3.select('#yearselect').property('value', '2019');
+
+d3.select('#countryselect').on('change', buttonClick);
+d3.select('#groupingselect').on('change', buttonClick);
+d3.select('#yearselect').on('change', buttonClick);

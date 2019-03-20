@@ -4,10 +4,22 @@ body {
   margin: 0;
 }
 
-.bar {
-  fill: orange;
+.bar--positive {
+  fill: royalblue;
 }
 
-.bar:hover {
-  fill: green;
+.bar--negative {
+  fill: orchid;
 }
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
