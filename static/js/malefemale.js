@@ -76,9 +76,9 @@ d3.json("https://api.census.gov/data/timeseries/idb/1year?get=AREA_KM2,NAME,AGE,
     .offset([0, 0])
     .html(function(d) {
       if (d[1] > 0){
-        return (`<div class = "male">  ${Math.abs(d[1]).toLocaleString()} males aged ${d[0]}</div>`);
+        return (`<div class = "male">${Math.abs(d[1]).toLocaleString()} males aged ${d[0]}</div>`);
       } else {
-        return (`<div class = "female">  ${Math.abs(d[1]).toLocaleString()} females aged ${d[0]}</div>`);
+        return (`<div class = "female">${Math.abs(d[1]).toLocaleString()} females aged ${d[0]}</div>`);
       };
     });
 
