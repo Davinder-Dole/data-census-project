@@ -8,11 +8,11 @@ def main():
 
 @app.route('/static/index.html')
 def static_index():
-    return render_template('index.html')
+    return render_template('index.html', page = 'index')
 
 @app.route('/static/census.html')
 def census_index():
-    return render_template('census2.html')
+    return render_template('index.html', page = 'census')
 
 @app.route('/census')
 def census():
