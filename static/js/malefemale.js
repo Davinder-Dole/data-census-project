@@ -303,6 +303,8 @@ function groupyears(data2, years){
         yeargroupings.push([`${index * years}`]);
       }
     }
+
+  
   });
 
 
