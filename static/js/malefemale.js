@@ -332,6 +332,7 @@ function buttonClick() {
 
 
 
+changePlot("US", "2", "2019");
 countrylist.forEach(function(data){
   d3.select('#countryselect')
     .append('option')
