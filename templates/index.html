@@ -44,9 +44,10 @@
 							</div>
 							<div class="main-menubar d-flex align-items-center">
 								<nav class="hide">
-									<a href="/index.html">Home</a>
+									<a href="/static/index.html">Home</a>
 									<a href="/census">Census</a>
-									<a href="/elements.html">Elements</a>
+									<a href="/malefemale">Population Distribution</a>
+									<a href="/map">World Map</a>
 								</nav>
 								<div class="menu-bar"><span class="lnr lnr-menu"></span></div>
 							</div>
@@ -54,11 +55,13 @@
 					</div>
 				</div>
 			</header>
+			<br><br><br>
 			<div class="banner-area">
 
-				
+				{% if page != "malefemale" %}
 				<div class="container">
 					<div class="row justify-content-center height align-items-center">
+				{% endif %}
 						<div class="col-lg-12">
 
 						{% if page == "index" %}
@@ -92,13 +95,15 @@
 
 						{% if page == "malefemale" %}
 						<div class="container-fluid">
+							<br>
 								<div class="row">
-								  <div class="col-4 offset-4">
-										<select name="Country" id="countryselect"></select>
-										<select name="Year" id="yearselect"></select>
-										<select name="Groupings" id="groupingselect"></select>
+								  <div class="col-3 offset-4">
+										Country: <select class="form-control form-control-lg is-valid" name="Country" id="countryselect"></select>
+										Year: <select class="form-control form-control-lg is-valid" name="Year" id="yearselect"></select>
+										Years Grouped by:<select class="form-control form-control-lg is-valid" name="Groupings" id="groupingselect"></select>
 								  </div>
 								</div>
+							<br>
 								<div class="row">
 								  <div class="col-12">
 										<div id = "graph"></div>
@@ -107,7 +112,9 @@
 						</div>
 						{% endif %}
 
-						
+
+
+
 
 						
 						</div>
@@ -242,9 +249,11 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+		{% if page == "census" %}
+		<script src="/static/js/plots.js"></script>
+		{% endif %}
 		<script src="https://d3js.org/d3-path.v1.min.js"></script>
 		<script src="https://d3js.org/d3-shape.v1.min.js"></script>
-		<script src="/static/js/plots.js"></script>
 		<script src="/static/js/malefemale.js"></script>
 	</body>
 </html>

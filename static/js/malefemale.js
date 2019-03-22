@@ -2,9 +2,14 @@ countrylist = [["Aruba", "AA"],["Antigua and Barbuda", "AC"],["United Arab Emira
 groupinglist = [1, 2, 4, 5, 10, 20, 25, 50]
 yearlist = ["2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991"]
 
-var margin = {top: 70, right: 50, bottom: 40, left: 500},
-width = 1920 - margin.left - margin.right,
-height = 1000 - margin.top - margin.bottom;
+// var margin = {top: 70, right: 50, bottom: 40, left: 500};
+var margin = {top: 0, right: 20, bottom: 50, left: 20};
+clientheight = document.documentElement.clientHeight;
+clientwidth = document.documentElement.clientWidth;
+console.log(`${clientheight} ${clientwidth}`);
+// 1920, 1000
+width = clientwidth/1.5 - margin.left - margin.right;
+height = clientheight/1.25 - margin.top - margin.bottom;
 bargap = height/1000;
 
 var x = d3.scaleLinear()
@@ -108,15 +113,6 @@ d3.json("https://api.census.gov/data/timeseries/idb/1year?get=AREA_KM2,NAME,AGE,
       .attr("width", function(d) { return ((Math.abs(x(+d[1]) - x(0))) * resizefactor); })
       .attr("height", y.bandwidth() - bargap);
 
-    // var drawLine = d3.line()
-    //   .x(data => x2(data[0]))
-    //   .y(data => y(data[1]))
-    //   .curve(d3.curveCardinal.tension(0));
-
-  
-    // svg.append("path")
-    //   .attr("d", drawLine(percentData))
-    //   .classed("line", true);
 
     svg.append("g")
         .attr("class", "xaxis")
@@ -124,11 +120,6 @@ d3.json("https://api.census.gov/data/timeseries/idb/1year?get=AREA_KM2,NAME,AGE,
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
 
-    // svg.append("g")
-    //     .attr("class", "xaxis")
-    //     .style("font-size", 20)
-    //     .attr("transform", "translate(" + shift + ",0)")
-    //     .call(xAxis2);
 
     svg.append("g")
         .attr("class", "yaxis")

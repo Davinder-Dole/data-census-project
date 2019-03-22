@@ -27,22 +27,13 @@ body {
 }
 
 .axis text {
-  /* pointer-events : none; */
-}
-
-select {
-  display: block;
-  margin: auto;
+  pointer-events : none;
 }
 
 .yaxis {
   stroke-width: 2px;
   font-size: 20px;
   font-weight: bold;
-}
-
-.tick {
-  fill: black;
 }
 
 .xaxis {
