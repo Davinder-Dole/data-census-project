@@ -10,9 +10,13 @@ def main():
 def static_index():
     return render_template('index.html')
 
+@app.route('/static/census.html')
+def census_index():
+    return render_template('census2.html')
+
 @app.route('/census')
 def census():
-    return render_template('census.html')
+    return redirect(url_for('census_index'))
 
 if __name__ == '__main__':
     app.run(debug=True)
