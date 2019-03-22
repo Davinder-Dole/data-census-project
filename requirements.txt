@@ -2,5 +2,5 @@ flask
 flask_sqlalchemy
 sqlalchemy
 pandas
-gunicorn
 humanize
+gunicorn
