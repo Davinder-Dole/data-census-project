@@ -139,6 +139,7 @@ function changePlot(country, years, year){
       
       
       d3.selectAll(".xaxis").remove()
+      d3.selectAll("tooltip").remove()
       d3.select(".yaxis").remove()
 
       data = groupyears(data, years);
