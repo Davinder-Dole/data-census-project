@@ -68,7 +68,7 @@
 							<div class="banner-content text-center">
 								<span class="text-white top text-uppercase">The World as we Know it</span>
 								<h1 class="text-white text-uppercase">Census Data</h1>
-								<a href="#" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+								<a href="/static/census.html" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
 							</div>
 
 						{% endif %}
@@ -100,6 +100,29 @@
 										Country: <select name="Country" id="countryselect"></select>
 										Year: <select name="Year" id="yearselect"></select>
 										Group Years by: <select name="Groupings" id="groupingselect"></select>
+								  </div>
+								  <div class="col-4">
+									  <br>
+										<div class="legend1">
+											<p class="country-name">
+												<span class="key-dot malelegend"></span>
+												Male
+											</p>
+										</div>
+
+										<div class="legend2">
+											<p class="country-name">
+												<span class="key-dot femalelegend"></span>
+												Female
+											</p>
+										</div>
+
+										<div class="legend3">
+											<p class="country-name">
+												<span class="key-dot percentlegend"></span>
+												Population Skew
+											</p>
+										</div>
 								  </div>
 								</div>
 								<div class="row">
@@ -133,9 +156,11 @@
 					<div class="row">
 						<div class="col-md-4">
 							<div class="single-feature d-flex flex-wrap justify-content-between">
+								<a href="/static/census.html">
 								<div class="icon d-flex align-items-center justify-content-center">
 									<span class="lnr lnr-sun"></span>
 								</div>
+								</a>
 								<div class="desc">
 									<h6 class="title text-uppercase">Bar Charts</h6>
 									<p>A look at a few different variables </p>
@@ -144,9 +169,11 @@
 						</div>
 						<div class="col-md-4">
 							<div class="single-feature d-flex flex-wrap justify-content-between">
+								<a href="/static/malefemale.html">
 								<div class="icon d-flex align-items-center justify-content-center">
 									<span class="lnr lnr-code"></span>
 								</div>
+								</a>
 								<div class="desc">
 									<h6 class="title text-uppercase">Male Female</h6>
 									<p>Overall look at the gender ratio </p>
@@ -155,9 +182,11 @@
 						</div>
 						<div class="col-md-4">
 							<div class="single-feature d-flex flex-wrap justify-content-between">
+								<a href="/map">
 								<div class="icon d-flex align-items-center justify-content-center">
 									<span class="lnr lnr-clock"></span>
 								</div>
+								</a>
 								<div class="desc">
 									<h6 class="title text-uppercase">Map View</h6>
 									<p>A topographical view </p>
@@ -244,7 +273,7 @@
 		<script src="js/jquery.magnific-popup.min.js"></script>
 		<script src="js/main.js"></script>
 
-		
+
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

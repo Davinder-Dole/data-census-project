@@ -60,6 +60,7 @@ select {
 }
 
 .tooltip {
+  padding: 5px;
   position: absolute;
   width: 150px;
   height: 70px;
@@ -84,4 +85,24 @@ select {
   stroke-width: 5px;
   stroke: black;
   stroke-linecap: round;
+}
+
+.key-dot {
+  display: inline-block;
+  height: 25px;
+  margin-right: .5em;
+  width: 25px;
+}
+
+.malelegend {
+  background: royalblue;
+}
+
+.femalelegend {
+  background: orchid;
+}
+
+.percentlegend {
+  background: yellow;
+  opacity: 0.25;
 }
