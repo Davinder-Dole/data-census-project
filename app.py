@@ -1,10 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
-    return 'Hello, World!'
+def main():
+    return redirect(url_for('static_index'))
+
+@app.route('/static/index.html')
+def static_index():
+    return render_template('index.html')
 
 @app.route('/census')
 def census():
