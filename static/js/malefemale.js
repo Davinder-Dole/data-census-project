@@ -116,7 +116,7 @@ d3.json("https://api.census.gov/data/timeseries/idb/1year?get=AREA_KM2,NAME,AGE,
 
     svg.append("g")
         .attr("class", "xaxis")
-        .style("font-size", 20)
+        .style("font-size", 14)
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
 

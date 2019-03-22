@@ -61,13 +61,13 @@ select {
 
 .tooltip {
   position: absolute;
-  width: 90px;
+  width: 150px;
   height: 70px;
   padding: 10px;
   font: 12px sans-serif;
   text-align: center;
   color: white;
-  border: 0;
+  border: 5px;
   border-radius: 10px;
 }
 

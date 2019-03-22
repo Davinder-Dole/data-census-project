@@ -2,7 +2,7 @@
 function buildPlot(census) {
   
   console.log(census);
-  var url = "https://api.census.gov/data/timeseries/idb/5year?get=NAME,POP,CBR,CDR,E0,AREA_KM2&FIPS&time=2012";
+  var url = "https://api.census.gov/data/timeseries/idb/5year?key=85ac64b6b5a9c0901b00329d1ef41f0c53ccfc98get=NAME,POP,CBR,CDR,E0,AREA_KM2&FIPS&time=2012";
 
   d3.json(url).then(function(data) {
        
