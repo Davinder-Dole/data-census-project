@@ -18,5 +18,13 @@ def census_index():
 def census():
     return redirect(url_for('census_index'))
 
+@app.route('/static/malefemale.html')
+def malefemale_index():
+    return render_template('index.html', page = 'malefemale')
+
+@app.route('/malefemale')
+def malefemale():
+    return redirect(url_for('malefemale_index'))
+
 if __name__ == '__main__':
     app.run(debug=True)

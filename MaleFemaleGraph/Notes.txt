@@ -1,7 +1,0 @@
-questions
-tooltip male - to color tooltips
-.ticks()
-how to shift line
-
-to do
-color tooltips
