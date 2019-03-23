@@ -331,7 +331,9 @@ function buttonClick() {
 }
 
 
-
+d3.selectAll(".xaxis").remove()
+d3.selectAll("tooltip").remove()
+d3.select(".yaxis").remove()
 changePlot("US", "2", "2019");
 
 countrylist.forEach(function(data){
