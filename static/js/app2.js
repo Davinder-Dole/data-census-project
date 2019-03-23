@@ -93,7 +93,7 @@ function plotMap() {
         layers: [street, popLayer]
       });
     
-      L.control.layers(baseMaps, overlayMaps).addTo(myMap);
+      L.control.layers(baseMaps).addTo(myMap);
       range(Population);
 
 var legend = L.control({position: 'bottomleft'});
